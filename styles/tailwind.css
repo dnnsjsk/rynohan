@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply overscroll-none bg-black  invisible;
+    font-family: Inter, sans-serif;
+}
+
+body.loaded {
+    @apply visible;
+}
+
+body > div {
+    @apply h-screen;
+}
+
+*,
+*:active,
+*:focus {
+    outline: none !important;
+}

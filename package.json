@@ -1,0 +1,39 @@
+{
+  "name": "rynohan",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.0.8",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "swr": "^1.0.1"
+  },
+  "devDependencies": {
+    "@react-three/drei": "^8.3.1",
+    "@react-three/fiber": "^7.0.15",
+    "@react-three/postprocessing": "^2.0.5",
+    "@remotion/bundler": "^2.6.4",
+    "@remotion/cli": "^2.6.4",
+    "@remotion/media-utils": "^2.6.4",
+    "@remotion/renderer": "^2.6.4",
+    "@remotion/three": "^2.6.4",
+    "@tailwindcss/typography": "^0.4.1",
+    "autoprefixer": "^10.3.6",
+    "eslint": "8.6.0",
+    "eslint-config-next": "12.0.7",
+    "lodash-es": "^4.17.21",
+    "minimist": "^1.2.5",
+    "postcss": "^8.3.8",
+    "postprocessing": "^6.23.1",
+    "prettier": "^2.4.1",
+    "remotion": "^2.6.4",
+    "tailwindcss": "^2.2.16",
+    "three": ">=0.126"
+  }
+}
