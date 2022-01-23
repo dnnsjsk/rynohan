@@ -2,7 +2,6 @@ import {
   MeshDistortMaterial,
   ContactShadows,
   Environment,
-  GradientTexture,
 } from "@react-three/drei";
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
@@ -11,7 +10,9 @@ import {
   DotScreen,
   EffectComposer,
   HueSaturation,
+  Noise,
   Pixelation,
+  Scanline,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
@@ -30,7 +31,7 @@ function Inner() {
         blur={2}
         far={1.6}
       />
-      <Environment preset="apartment" />
+      <Environment preset="lobby" />
     </>
   );
 }
@@ -38,27 +39,16 @@ function Inner() {
 function Ball() {
   return (
     <mesh>
-      <coneBufferGeometry args={[15, 1, 30, 10]} />
+      <sphereBufferGeometry args={[1, 64, 64]} />
       <MeshDistortMaterial
+        color={color.red[300]}
         envMapIntensity={1}
-        clearcoat={0}
+        clearcoat={0.25}
         clearcoatRoughness={0}
-        metalness={1}
-        distort={0}
+        metalness={0.5}
+        distort={5}
         speed={0}
-      >
-        <GradientTexture
-          stops={[0, 0.25, 0.35, 0.5, 0.75, 1]}
-          colors={[
-            color.yellow[400],
-            color.green[200],
-            color.orange[300],
-            color.emerald[400],
-            color.indigo[400],
-            color.rose[400],
-          ]}
-        />
-      </MeshDistortMaterial>
+      />
     </mesh>
   );
 }
@@ -67,18 +57,20 @@ export default function App(props) {
   return (
     <Canvas
       colorManagement={true}
-      style={{ background: "#212121" }}
+      style={{ background: "#202020" }}
       next={props.next}
       camera={{
         position: [
-          -0.0000020681888532448726, 11.214540380835544, 0.00001102218267045092,
+          -0.1253108151952191, -1.3650144950515264, -1.5550714148260623,
         ],
       }}
     >
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={1} />
+        <HueSaturation saturation={0.7} />
+        <Scanline blendFunction={BlendFunction.OVERLAY} density={4} />
+        <Noise opacity={0.025} />
         <DotScreen
-          blendFunction={BlendFunction.DIVIDE}
+          blendFunction={BlendFunction.OVERLAY}
           angle={Math.PI * 0.25}
           scale={1}
         />

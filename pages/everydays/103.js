@@ -1,5 +1,5 @@
 import {
-  MeshWobbleMaterial,
+  MeshDistortMaterial,
   ContactShadows,
   Environment,
   GradientTexture,
@@ -7,15 +7,20 @@ import {
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
-import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
-import { Pixelation } from "@react-three/postprocessing";
+import {
+  DotScreen,
+  EffectComposer,
+  HueSaturation,
+  Pixelation,
+} from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
 
-function Inner(props) {
+function Inner() {
   return (
     <>
-      <Ball next={props.next} />
+      <Ball />
       <ContactShadows
         rotation={[Math.PI / 2, 0, 0]}
         position={[0, -1.6, 0]}
@@ -25,7 +30,7 @@ function Inner(props) {
         blur={2}
         far={1.6}
       />
-      <Environment preset="warehouse" />
+      <Environment preset="apartment" />
     </>
   );
 }
@@ -33,21 +38,27 @@ function Inner(props) {
 function Ball() {
   return (
     <mesh>
-      <boxBufferGeometry args={[256, 256, 256]} />
-      <MeshWobbleMaterial
+      <coneBufferGeometry args={[15, 1, 30, 10]} />
+      <MeshDistortMaterial
         envMapIntensity={1}
-        clearcoat={1}
+        clearcoat={0}
         clearcoatRoughness={0}
-        metalness={0.1}
-        factor={100}
+        metalness={1}
+        distort={0}
         speed={0}
-        roughness={0.5}
       >
         <GradientTexture
-          stops={[0, 0.25, 1]}
-          colors={[color.fuchsia[400], color.indigo[400], color.yellow[400]]}
+          stops={[0, 0.25, 0.35, 0.5, 0.75, 1]}
+          colors={[
+            color.yellow[400],
+            color.green[200],
+            color.orange[300],
+            color.emerald[400],
+            color.indigo[400],
+            color.rose[400],
+          ]}
         />
-      </MeshWobbleMaterial>
+      </MeshDistortMaterial>
     </mesh>
   );
 }
@@ -56,17 +67,22 @@ export default function App(props) {
   return (
     <Canvas
       colorManagement={true}
-      style={{ background: "#ffffff" }}
+      style={{ background: "#212121" }}
       next={props.next}
       camera={{
         position: [
-          -0.0000188672334609683, 80.90812074802874, 0.00011638879860137018,
+          -0.0000020681888532448726, 11.214540380835544, 0.00001102218267045092,
         ],
       }}
     >
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={0.9} />
-        <Pixelation granularity={10} />
+        <HueSaturation saturation={1} />
+        <DotScreen
+          blendFunction={BlendFunction.DIVIDE}
+          angle={Math.PI * 0.25}
+          scale={1}
+        />
+        <Pixelation granularity={5} />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>
