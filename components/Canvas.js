@@ -25,7 +25,7 @@ function Orbit() {
   const { camera } = useThree();
 
   function onChange() {
-    console.log(camera);
+    console.log(`${camera.position.x}, ${camera.position.y}, ${camera.position.z}`);
   }
 
   return <OrbitControls onChange={onChange} />;
