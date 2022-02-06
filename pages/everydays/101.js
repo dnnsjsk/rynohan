@@ -6,10 +6,7 @@ import {
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
-import {
-  EffectComposer,
-  HueSaturation,
-} from "@react-three/postprocessing";
+import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 
 const Outer = withFrame(Inner);
 
@@ -54,7 +51,11 @@ export default function App(props) {
     <Canvas
       colorManagement={true}
       next={props.next}
-      camera={{ position: [-0.00012908346295051652, -163.61307719819646, 0.00010057346745925711] }}
+      camera={{
+        position: [
+          -0.00012908346295051652, -163.61307719819646, 0.00010057346745925711,
+        ],
+      }}
     >
       <color attach="background" args={[color.green[100]]} />
       <EffectComposer disableNormalPass={true}>

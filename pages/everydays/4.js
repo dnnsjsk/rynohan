@@ -27,11 +27,7 @@ function Inner() {
         visible={true}
       >
         <sphereBufferGeometry attach="geometry" args={[40, 40, 50]} />
-        <MeshDistortMaterial
-          distort={1}
-          speed={0.1}
-          attach="material"
-        >
+        <MeshDistortMaterial distort={1} speed={0.1} attach="material">
           <GradientTexture
             stops={[0, 0.25, 0.5]}
             colors={[color.green[800], color.amber[700], color.sky[800]]}

@@ -7,19 +7,19 @@ import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
+  ChromaticAberration,
   DotScreen,
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
-import { Suspense } from "react";
 import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
 
-function Inner(props) {
+function Inner() {
   return (
     <>
-      <Ball next={props.next} />
+      <Ball />
       <ContactShadows
         rotation={[Math.PI / 2, 0, 0]}
         position={[0, -1.6, 0]}
@@ -29,7 +29,7 @@ function Inner(props) {
         blur={2}
         far={1.6}
       />
-      <Environment preset="forest" />
+      <Environment preset="apartment" />
     </>
   );
 }
@@ -37,15 +37,15 @@ function Inner(props) {
 function Ball() {
   return (
     <mesh>
-      <sphereBufferGeometry args={[32, 128, 128]} />
+      <sphereBufferGeometry args={[1, 64, 64]} />
       <MeshWobbleMaterial
-        color={color.green[400]}
+        color={color.yellow[400]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={0}
         metalness={0.1}
-        factor={100}
-        speed={0.01}
+        factor={10}
+        speed={0}
         roughness={0}
       />
     </mesh>
@@ -58,23 +58,21 @@ export default function App(props) {
       colorManagement={true}
       style={{ background: "#202020" }}
       next={props.next}
-      camera={{ position: [-20.81333, 1.03289, 33.1491] }}
+      camera={{
+        position: [
+          1.0722519388886211, 1.2440966430133937, -0.47058546222970943,
+        ],
+      }}
     >
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={0.7} />
-        <DotScreen
-          blendFunction={BlendFunction.MULTIPLY}
-          angle={Math.PI * 0.25}
-          scale={500}
+        <HueSaturation saturation={0.6} />
+
+        <ChromaticAberration
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.02, 0.5]}
         />
       </EffectComposer>
-      {props.next ? (
-        <Suspense fallback={null}>
-          <Outer next={props.next} />
-        </Suspense>
-      ) : (
-        <Outer next={props.next} />
-      )}
+      <Outer next={props.next} />
     </Canvas>
   );
 }

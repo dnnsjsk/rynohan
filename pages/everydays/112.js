@@ -56,7 +56,11 @@ export default function App(props) {
     <Canvas
       colorManagement={true}
       next={props.next}
-      camera={{ position: [0.04063923075891745, 1.1796476604417163, 0.14576882005950234] }}
+      camera={{
+        position: [
+          0.04063923075891745, 1.1796476604417163, 0.14576882005950234,
+        ],
+      }}
     >
       <color attach="background" args={[color.indigo[200]]} />
       <EffectComposer disableNormalPass={true}>

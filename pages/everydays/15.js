@@ -3,7 +3,8 @@ import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
   EffectComposer,
-  HueSaturation, Noise,
+  HueSaturation,
+  Noise,
 } from "@react-three/postprocessing";
 import { useEffect, useState } from "react";
 import * as colors from "../../constants/colors";
@@ -62,7 +63,7 @@ export default function App(props) {
       <color attach="background" args={[color.emerald[400]]} />
       <EffectComposer>
         <HueSaturation saturation={0.2} />
-        <Noise opacity={0.25}/>
+        <Noise opacity={0.25} />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>

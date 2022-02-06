@@ -22,7 +22,6 @@ const Outer = withFrame(Inner);
 function Inner(props) {
   return (
     <>
-
       <Sky
         distance={4500}
         sunPosition={[0, 1, 0]}

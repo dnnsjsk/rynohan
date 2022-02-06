@@ -7,9 +7,10 @@ import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
-    DotScreen,
-    EffectComposer,
-    HueSaturation, Pixelation,
+  DotScreen,
+  EffectComposer,
+  HueSaturation,
+  Pixelation,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
@@ -58,9 +59,7 @@ export default function App(props) {
       style={{ background: "#202020" }}
       next={props.next}
       camera={{
-        position: [
-            0.8584712285922782, -0.9499213021741576, 0.3291818180813174
-        ],
+        position: [0.8584712285922782, -0.9499213021741576, 0.3291818180813174],
       }}
     >
       <EffectComposer disableNormalPass={true}>
@@ -70,7 +69,7 @@ export default function App(props) {
           angle={Math.PI * 0.25}
           scale={100}
         />
-          <Pixelation granularity={5}/>
+        <Pixelation granularity={5} />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>

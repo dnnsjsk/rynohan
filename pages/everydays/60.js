@@ -1,7 +1,4 @@
-import {
-  Environment,
-  MeshDistortMaterial,
-} from "@react-three/drei";
+import { Environment, MeshDistortMaterial } from "@react-three/drei";
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";

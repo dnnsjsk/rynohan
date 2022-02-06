@@ -6,8 +6,12 @@ import {
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
-import {EffectComposer, HueSaturation, Scanline} from "@react-three/postprocessing";
-import {BlendFunction} from "postprocessing";
+import {
+  EffectComposer,
+  HueSaturation,
+  Scanline,
+} from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
 
@@ -57,7 +61,7 @@ export default function App(props) {
       <color attach="background" args={[color.black]} />
       <EffectComposer disableNormalPass={true}>
         <HueSaturation saturation={0.9} />
-          <Scanline blendFunction={BlendFunction.OVERLAY} density={4}/>
+        <Scanline blendFunction={BlendFunction.OVERLAY} density={4} />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>

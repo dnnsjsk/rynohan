@@ -2,16 +2,16 @@ import {
   MeshWobbleMaterial,
   ContactShadows,
   Environment,
+  GradientTexture,
 } from "@react-three/drei";
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
-  DotScreen,
+  ChromaticAberration,
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
-import { Suspense } from "react";
 import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
@@ -29,7 +29,7 @@ function Inner(props) {
         blur={2}
         far={1.6}
       />
-      <Environment preset="forest" />
+      <Environment preset="warehouse" />
     </>
   );
 }
@@ -37,17 +37,21 @@ function Inner(props) {
 function Ball() {
   return (
     <mesh>
-      <sphereBufferGeometry args={[32, 128, 128]} />
+      <boxBufferGeometry args={[128, 128, 128]} />
       <MeshWobbleMaterial
-        color={color.green[400]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={0}
         metalness={0.1}
         factor={100}
-        speed={0.01}
-        roughness={0}
-      />
+        speed={0}
+        roughness={0.5}
+      >
+        <GradientTexture
+          stops={[0, 0.25, 1]}
+          colors={[color.blue[400], color.rose[400], color.green[400]]}
+        />
+      </MeshWobbleMaterial>
     </mesh>
   );
 }
@@ -56,25 +60,20 @@ export default function App(props) {
   return (
     <Canvas
       colorManagement={true}
-      style={{ background: "#202020" }}
+      style={{ background: "#ffffff" }}
       next={props.next}
-      camera={{ position: [-20.81333, 1.03289, 33.1491] }}
+      camera={{
+        position: [70.73406215727603, -86.9270874263431, 36.642855519859424],
+      }}
     >
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={0.7} />
-        <DotScreen
-          blendFunction={BlendFunction.MULTIPLY}
-          angle={Math.PI * 0.25}
-          scale={500}
+        <HueSaturation saturation={0.9} />
+        <ChromaticAberration
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.02, 0.5]}
         />
       </EffectComposer>
-      {props.next ? (
-        <Suspense fallback={null}>
-          <Outer next={props.next} />
-        </Suspense>
-      ) : (
-        <Outer next={props.next} />
-      )}
+      <Outer next={props.next} />
     </Canvas>
   );
 }

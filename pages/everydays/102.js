@@ -57,7 +57,11 @@ export default function App(props) {
       colorManagement={true}
       style={{ background: "#ffffff" }}
       next={props.next}
-      camera={{ position: [-0.000030594490747234745, -117.90812074802946, 0.00011386967147379542] }}
+      camera={{
+        position: [
+          -0.000030594490747234745, -117.90812074802946, 0.00011386967147379542,
+        ],
+      }}
     >
       <EffectComposer disableNormalPass={true}>
         <HueSaturation saturation={0.9} />

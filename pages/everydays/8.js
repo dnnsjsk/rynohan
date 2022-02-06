@@ -51,7 +51,12 @@ function Sphere() {
   return (
     <mesh position={[0, 0, 0]}>
       <sphereBufferGeometry attach="geometry" args={[5, 5, 5]} />
-      <MeshWobbleMaterial attach="material" factor={10} speed={0.1} roughness={1}>
+      <MeshWobbleMaterial
+        attach="material"
+        factor={10}
+        speed={0.1}
+        roughness={1}
+      >
         <GradientTexture
           stops={[0, 0.5, 1]}
           colors={[color.blue[800], color.cyan[800], color.yellow[800]]}

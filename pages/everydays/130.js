@@ -7,11 +7,11 @@ import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
+  ChromaticAberration,
   DotScreen,
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
-import { Suspense } from "react";
 import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
@@ -29,7 +29,7 @@ function Inner(props) {
         blur={2}
         far={1.6}
       />
-      <Environment preset="forest" />
+      <Environment preset="lobby" />
     </>
   );
 }
@@ -39,12 +39,12 @@ function Ball() {
     <mesh>
       <sphereBufferGeometry args={[32, 128, 128]} />
       <MeshWobbleMaterial
-        color={color.green[400]}
+        color={color.blue[900]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={0}
         metalness={0.1}
-        factor={100}
+        factor={1}
         speed={0.01}
         roughness={0}
       />
@@ -58,23 +58,18 @@ export default function App(props) {
       colorManagement={true}
       style={{ background: "#202020" }}
       next={props.next}
-      camera={{ position: [-20.81333, 1.03289, 33.1491] }}
+      camera={{
+        position: [-34.589636379592505, -17.682782802677576, 4.890887512364523],
+      }}
     >
       <EffectComposer disableNormalPass={true}>
         <HueSaturation saturation={0.7} />
-        <DotScreen
-          blendFunction={BlendFunction.MULTIPLY}
-          angle={Math.PI * 0.25}
-          scale={500}
+        <ChromaticAberration
+          blendFunction={BlendFunction.OVERLAY}
+          offset={[0.02, 0.75]}
         />
       </EffectComposer>
-      {props.next ? (
-        <Suspense fallback={null}>
-          <Outer next={props.next} />
-        </Suspense>
-      ) : (
-        <Outer next={props.next} />
-      )}
+      <Outer next={props.next} />
     </Canvas>
   );
 }

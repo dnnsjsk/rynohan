@@ -27,7 +27,11 @@ function Inner(props) {
             rotation={[
               0,
               0,
-              interpolate(Math.sin((props.f / 100 * 30) * index), [-1, 1], [0.8, 2]),
+              interpolate(
+                Math.sin((props.f / 100) * 30 * index),
+                [-1, 1],
+                [0.8, 2]
+              ),
             ]}
           />
         );

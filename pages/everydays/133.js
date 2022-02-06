@@ -1,32 +1,33 @@
 import {
-  MeshWobbleMaterial,
   ContactShadows,
   Environment,
+  MeshWobbleMaterial,
 } from "@react-three/drei";
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
-  DotScreen,
+  ChromaticAberration,
   EffectComposer,
   HueSaturation,
+  Pixelation,
+  Scanline,
 } from "@react-three/postprocessing";
-import { Suspense } from "react";
 import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
 
-function Inner(props) {
+function Inner() {
   return (
     <>
-      <Ball next={props.next} />
+      <Ball />
       <ContactShadows
         rotation={[Math.PI / 2, 0, 0]}
         position={[0, -1.6, 0]}
         opacity={1}
         width={15}
         height={15}
-        blur={2}
+        blur={5}
         far={1.6}
       />
       <Environment preset="forest" />
@@ -36,16 +37,16 @@ function Inner(props) {
 
 function Ball() {
   return (
-    <mesh>
-      <sphereBufferGeometry args={[32, 128, 128]} />
+    <mesh position={[0, -5, 0]}>
+      <tetrahedronBufferGeometry args={[72, 24, 24]} />
       <MeshWobbleMaterial
-        color={color.green[400]}
+        color={color.emerald[900]}
         envMapIntensity={1}
         clearcoat={1}
-        clearcoatRoughness={0}
-        metalness={0.1}
-        factor={100}
-        speed={0.01}
+        clearcoatRoughness={1}
+        metalness={4}
+        factor={20}
+        speed={0}
         roughness={0}
       />
     </mesh>
@@ -56,25 +57,21 @@ export default function App(props) {
   return (
     <Canvas
       colorManagement={true}
-      style={{ background: "#202020" }}
       next={props.next}
-      camera={{ position: [-20.81333, 1.03289, 33.1491] }}
+      camera={{
+        position: [-6.933602929256943, 58.92821548169884, 4.081018337156964],
+      }}
     >
+      <color attach="background" args={[color.black]} />
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={0.7} />
-        <DotScreen
-          blendFunction={BlendFunction.MULTIPLY}
-          angle={Math.PI * 0.25}
-          scale={500}
+        <HueSaturation saturation={0.8} />
+        <Pixelation granularity={1} />
+        <ChromaticAberration
+          blendFunction={BlendFunction.OVERLAY}
+          offset={[0.02, 0.75]}
         />
       </EffectComposer>
-      {props.next ? (
-        <Suspense fallback={null}>
-          <Outer next={props.next} />
-        </Suspense>
-      ) : (
-        <Outer next={props.next} />
-      )}
+      <Outer next={props.next} />
     </Canvas>
   );
 }

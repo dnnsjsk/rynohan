@@ -7,10 +7,7 @@ import {
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
-import {
-  EffectComposer,
-  HueSaturation,
-} from "@react-three/postprocessing";
+import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 
 const Outer = withFrame(Inner);
 

@@ -1,13 +1,13 @@
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
-import * as color from "../../constants/tailwind";
+import * as colour from "../../constants/tailwind";
 import {
+  ChromaticAberration,
+  DotScreen,
   EffectComposer,
   HueSaturation,
-  Scanline,
 } from "@react-three/postprocessing";
 import { useEffect, useState } from "react";
-import * as colour from "../../constants/tailwind";
 import { randomNumber } from "../../utils/randomNumber";
 import { BlendFunction } from "postprocessing";
 
@@ -17,17 +17,14 @@ function Inner() {
   return (
     <>
       <instancedMesh>
-        {Array.from({ length: 150 }, (el, index) => {
+        {Array.from({ length: 10 }, (el, index) => {
           return (
-            index !== 1 &&
-            index !== 1 && (
-              <Ring
-                key={index}
-                position={[0, 0, 0]}
-                args={[index, index * 1.013, 4]}
-                rotation={[index * 0.1, index * 0.05, 0]}
-              />
-            )
+            <Ring
+              key={index}
+              position={[0, 0, 0]}
+              args={[10, 100, 1000]}
+              rotation={[index * 0.5, index, 0]}
+            />
           );
         })}
       </instancedMesh>
@@ -39,7 +36,7 @@ function Ring(props) {
   const [color, setColor] = useState();
 
   useEffect(() => {
-    setColor(colour.lime[`${randomNumber(3, 5)}00`]);
+    setColor(colour.indigo[`${randomNumber(3, 7)}00`]);
   }, []);
 
   return (
@@ -49,7 +46,7 @@ function Ring(props) {
       castShadow={true}
       position={props.position}
     >
-      <ringBufferGeometry attach="geometry" args={props.args} />
+      <torusKnotBufferGeometry attach="geometry" args={props.args} />
       <meshBasicMaterial attach="material" color={color} />
     </mesh>
   );
@@ -60,12 +57,20 @@ export default function App(props) {
     <Canvas
       next={props.next}
       colorManagement={true}
-      camera={{ fov: 30, position: [1.716, -1.438, -184.86] }}
+      camera={{
+        fov: 30,
+        position: [
+          -65.15095793588209, -10.136245696813074, -140.00745256144046,
+        ],
+      }}
     >
-      <color attach="background" args={[color.lime[50]]} />
+      <color attach="background" args={[colour.blueGray[200]]} />
       <EffectComposer>
-        <HueSaturation saturation={0.45} />
-        <Scanline blendFunction={BlendFunction.OVERLAY} density={4} />
+        <HueSaturation saturation={0.3} />
+        <ChromaticAberration
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.02, 0.5]}
+        />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>

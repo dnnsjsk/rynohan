@@ -51,7 +51,7 @@ export default function App(props) {
     <Canvas
       colorManagement={true}
       next={props.next}
-      camera={{ position: [11.6939, 43.7796, 2.5230] }}
+      camera={{ position: [11.6939, 43.7796, 2.523] }}
     >
       <color attach="background" args={[color.blue[100]]} />
       <EffectComposer disableNormalPass={true}>

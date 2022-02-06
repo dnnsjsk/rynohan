@@ -59,9 +59,7 @@ export default function App(props) {
       style={{ background: "#ffffff" }}
       next={props.next}
       camera={{
-        position: [
-            47.47277496235172, 179.11639858754035, 55.74585772667591
-        ],
+        position: [47.47277496235172, 179.11639858754035, 55.74585772667591],
       }}
     >
       <EffectComposer disableNormalPass={true}>
