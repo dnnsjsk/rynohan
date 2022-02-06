@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import * as day from "../constants/day";
+import { current } from "../constants/day";
 
 function Button(props) {
   return (
@@ -143,9 +144,23 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Ryno Han</title>
         <meta name="description" content="" />
-        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192" />
-        <link rel="apple-touch-icon-precomposed" type="image/png" href="/favicon-180x180.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-32x32.png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-192x192.png"
+          sizes="192x192"
+        />
+        <link
+          rel="apple-touch-icon-precomposed"
+          type="image/png"
+          href="/favicon-180x180.png"
+        />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -161,7 +176,9 @@ export default function App({ Component, pageProps }) {
           <header
             className={`md:h-screen md:overflow-auto md:border-r md:border-white md:fixed md:top-0 md:w-[400px]`}
           >
-            <div className={`border-b border-white divide-y divide-white md:max-h-[max-content]`}>
+            <div
+              className={`border-b border-white divide-y divide-white md:max-h-[max-content]`}
+            >
               <Link href="/" passHref>
                 <a className={`p-10 w-full inline-block hover:bg-white/10`}>
                   <h1
@@ -170,9 +187,15 @@ export default function App({ Component, pageProps }) {
                     <span style={{ letterSpacing: "0.055em" }}>Ryno</span>
                     <br />
                     Han
+                    <br />
                   </h1>
                 </a>
               </Link>
+              <h2
+                className={`w-full p-10 text-white text-4xl inline-block !leading-[0.9] font-black uppercase cursor-pointer`}
+              >
+                Day {current}
+              </h2>
               {router.pathname.includes("everydays") && (
                 <div className={`grid grid-cols-2 divide-x divide-white`}>
                   {[
@@ -206,13 +229,11 @@ export default function App({ Component, pageProps }) {
                   router.pathname.includes("everydays") ? "hidden md:block" : ""
                 }`}
               >
-                <span className={`max-w-xs inline-block`}>
+                <span className={`max-w-xs inline-block space-y-4`}>
                   Interdimensional creator based in Berlin, Germany. Making
                   weird things with code (three.js) since October 10th, 2021.
                   <br />
-                  <span className="mt-4 inline-block">
-                    One new piece every day.
-                  </span>
+                  <span className="inline-block">One new piece every day.</span>
                 </span>
               </p>
               <div
