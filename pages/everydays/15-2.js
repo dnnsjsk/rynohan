@@ -6,12 +6,21 @@ import {
   HueSaturation,
   Noise,
 } from "@react-three/postprocessing";
-import { useEffect, useState } from "react";
-import * as colors from "../../constants/colors";
 
 const Outer = withFrame(Inner);
 
 function Inner() {
+  const randomColors = [
+    color.emerald["400"],
+    color.orange["400"],
+    color.red["400"],
+    color.amber["400"],
+    color.sky["400"],
+    color.indigo["400"],
+    color.green["400"],
+    color.rose["400"],
+  ];
+
   return (
     <>
       <instancedMesh position={[0, 400, 0]}>
@@ -20,8 +29,9 @@ function Inner() {
             index !== 1 &&
             index !== 1 && (
               <Ring
+                color={randomColors[index % randomColors.length]}
                 key={index}
-                position={[0, index * 30 * -1, -20]}
+                position={[0, index * 32 * -1, -20]}
                 args={[index * 2, index * 0.4, 2000]}
                 rotation={[index * 0.45, index * 0.01, 0]}
               />
@@ -34,12 +44,6 @@ function Inner() {
 }
 
 function Ring(props) {
-  const [color, setColor] = useState();
-
-  useEffect(() => {
-    setColor(colors.colors[Math.floor(Math.random() * colors.colors.length)]);
-  }, []);
-
   return (
     <mesh
       visible={true}
@@ -48,7 +52,7 @@ function Ring(props) {
       position={props.position}
     >
       <ringBufferGeometry attach="geometry" args={props.args} />
-      <meshBasicMaterial attach="material" color={color} />
+      <meshBasicMaterial attach="material" color={props.color} />
     </mesh>
   );
 }
@@ -58,12 +62,17 @@ export default function App(props) {
     <Canvas
       next={props.next}
       colorManagement={true}
-      camera={{ fov: 30, position: [70.1083, -124.94612, -543.252499] }}
+      camera={{
+        fov: 30,
+        position: [
+          -24.700463167789817, -331.5224549033206, -452.9158299443381
+        ],
+      }}
     >
-      <color attach="background" args={[color.indigo[400]]} />
+      <color attach="background" args={[color.orange[200]]} />
       <EffectComposer>
-        <HueSaturation saturation={0.2} />
-        <Noise opacity={0.25} />
+        <HueSaturation saturation={0.25} />
+        <Noise opacity={0.5} />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>
