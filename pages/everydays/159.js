@@ -102,7 +102,12 @@ export default function App(props) {
     <Canvas
       next={props.next}
       colorManagement={true}
-      camera={{ fov: 30, position: [0.00006637916181067923, 120.21557237379858, -0.00019312640129536313] }}
+      camera={{
+        fov: 30,
+        position: [
+          0.00006637916181067923, 120.21557237379858, -0.00019312640129536313,
+        ],
+      }}
     >
       <color attach="background" args={[color.red[400]]} />
       <Outer next={props.next} />

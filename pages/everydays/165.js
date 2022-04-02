@@ -7,11 +7,12 @@ import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
-    Bloom, ChromaticAberration,
-    EffectComposer,
-    HueSaturation,
-    Noise,
-    Scanline,
+  Bloom,
+  ChromaticAberration,
+  EffectComposer,
+  HueSaturation,
+  Noise,
+  Scanline,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
@@ -70,10 +71,10 @@ export default function App(props) {
         />
         <Noise opacity={0.025} />
         <Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} />
-          <ChromaticAberration
-              blendFunction={BlendFunction.NORMAL}
-              offset={[0.02, 0.5]}
-          />
+        <ChromaticAberration
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.02, 0.5]}
+        />
       </EffectComposer>
       <Outer next={props.next} />
     </Canvas>

@@ -10,6 +10,7 @@ import {
   ChromaticAberration,
   EffectComposer,
   HueSaturation,
+  Scanline,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
@@ -28,7 +29,7 @@ function Inner() {
         blur={5}
         far={1.6}
       />
-      <Environment preset="lobby" />
+      <Environment preset="forest" />
     </>
   );
 }
@@ -36,16 +37,16 @@ function Inner() {
 function Ball() {
   return (
     <mesh position={[0.5, 1, 0]}>
-      <boxBufferGeometry args={[4, 128, 128]} />
+      <dodecahedronBufferGeometry args={[10, 10, 10]} />
       <MeshWobbleMaterial
-        color={color.indigo[900]}
+        color={color.pink[900]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={1}
         metalness={4}
         factor={10}
         speed={0}
-        roughness={0}
+        roughness={1}
       />
     </mesh>
   );
@@ -57,12 +58,13 @@ export default function App(props) {
       colorManagement={true}
       next={props.next}
       camera={{
-        position: [-4.72290689070235, -13.81748588740382, 40.566073881704746],
+        position: [18.02626759189759, 0.16322980884911015, 0.1238014216999238],
       }}
     >
-      <color attach="background" args={[color.red[200]]} />
+      <color attach="background" args={[color.rose[200]]} />
       <EffectComposer disableNormalPass={true}>
         <HueSaturation saturation={0.7} />
+        <Scanline blendFunction={BlendFunction.OVERLAY} density={10} />
         <ChromaticAberration
           blendFunction={BlendFunction.OVERLAY}
           offset={[0.02, 0.75]}

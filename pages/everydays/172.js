@@ -59,7 +59,9 @@ export default function App(props) {
       colorManagement={true}
       next={props.next}
       camera={{
-        position: [0.00010208129024257218, -104.5620495762938, -0.000022641386877765737],
+        position: [
+          0.00010208129024257218, -104.5620495762938, -0.000022641386877765737,
+        ],
       }}
     >
       <color attach="background" args={[color.black]} />

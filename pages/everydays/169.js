@@ -72,7 +72,10 @@ export default function App(props) {
     <Canvas
       next={props.next}
       colorManagement={true}
-      camera={{ fov: 30, position: [-0.745121571456015, 67.31561010449182, 1.0691827935016764] }}
+      camera={{
+        fov: 30,
+        position: [-0.745121571456015, 67.31561010449182, 1.0691827935016764],
+      }}
     >
       <EffectComposer>
         <HueSaturation saturation={0.6} />

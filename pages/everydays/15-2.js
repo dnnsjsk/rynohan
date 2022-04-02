@@ -64,9 +64,7 @@ export default function App(props) {
       colorManagement={true}
       camera={{
         fov: 30,
-        position: [
-          -24.700463167789817, -331.5224549033206, -452.9158299443381
-        ],
+        position: [-24.700463167789817, -331.5224549033206, -452.9158299443381],
       }}
     >
       <color attach="background" args={[color.orange[200]]} />

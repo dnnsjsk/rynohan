@@ -86,7 +86,10 @@ export default function App(props) {
     <Canvas
       next={props.next}
       colorManagement={true}
-      camera={{ fov: 30, position: [16.7980814022616, 16.186974563387526, 1.0238699211561486] }}
+      camera={{
+        fov: 30,
+        position: [16.7980814022616, 16.186974563387526, 1.0238699211561486],
+      }}
     >
       <color attach="background" args={[color.blue[200]]} />
       <EffectComposer>
