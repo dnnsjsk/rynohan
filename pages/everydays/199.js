@@ -58,7 +58,9 @@ export default function App(props) {
       colorManagement={true}
       next={props.next}
       camera={{
-        position: [-0.00007062401660243051, -103.11723974584805, -0.00007513596620345248],
+        position: [
+          -0.00007062401660243051, -103.11723974584805, -0.00007513596620345248,
+        ],
       }}
     >
       <color attach="background" args={[color.sky[200]]} />
