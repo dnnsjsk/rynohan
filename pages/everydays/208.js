@@ -1,50 +1,51 @@
 import {
+  MeshWobbleMaterial,
   ContactShadows,
   Environment,
-  MeshWobbleMaterial,
 } from "@react-three/drei";
 import Canvas from "../../components/Canvas";
 import { withFrame } from "../../hoc/withFrame";
 import * as color from "../../constants/tailwind";
 import {
   ChromaticAberration,
+  DotScreen,
   EffectComposer,
   HueSaturation,
-  Scanline,
+  Vignette,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
 const Outer = withFrame(Inner);
 
-function Inner() {
+function Inner(props) {
   return (
     <>
-      <Ball />
+      <Ball next={props.next} />
       <ContactShadows
         rotation={[Math.PI / 2, 0, 0]}
-        position={[0, -1.6, 0]}
+        position={[0, 0, 0]}
         opacity={1}
         width={15}
         height={15}
-        blur={5}
+        blur={2}
         far={1.6}
       />
-      <Environment preset="apartment" />
+      <Environment preset="studio" />
     </>
   );
 }
 
 function Ball() {
   return (
-    <mesh position={[0.5, 1, 0]}>
-      <dodecahedronBufferGeometry args={[256, 256, 256]} />
+    <mesh>
+      <icosahedronBufferGeometry args={[12, 12, 12]} />
       <MeshWobbleMaterial
-        color={color.pink[900]}
+        color={color.yellow[100]}
         envMapIntensity={1}
         clearcoat={1}
-        clearcoatRoughness={1}
-        metalness={4}
-        factor={100}
+        clearcoatRoughness={0}
+        metalness={0.1}
+        factor={1000}
         speed={0}
         roughness={0}
       />
@@ -56,18 +57,17 @@ export default function App(props) {
   return (
     <Canvas
       colorManagement={true}
+      style={{ background: "#000" }}
       next={props.next}
       camera={{
-        position: [-55.036824450594196, -47.240690991331334, 33.25257606702306],
+        position: [2.6026255101176656, 9.93384124577835, -1.0046852252597365],
       }}
     >
-      <color attach="background" args={[color.rose[200]]} />
       <EffectComposer disableNormalPass={true}>
-        <HueSaturation saturation={0.7} />
-        <Scanline blendFunction={BlendFunction.OVERLAY} density={4} />
+        <HueSaturation saturation={0.6} />
         <ChromaticAberration
-          blendFunction={BlendFunction.OVERLAY}
-          offset={[0.02, 0.75]}
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.02, 0.5]}
         />
       </EffectComposer>
       <Outer next={props.next} />

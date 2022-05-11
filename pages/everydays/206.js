@@ -29,7 +29,7 @@ function Inner() {
         blur={5}
         far={1.6}
       />
-      <Environment preset="forest" />
+      <Environment preset="warehouse" />
     </>
   );
 }
@@ -37,14 +37,14 @@ function Inner() {
 function Ball() {
   return (
     <mesh position={[0.5, 1, 0]}>
-      <coneBufferGeometry args={[256, 256, 256]} />
+      <torusKnotBufferGeometry args={[256, 256, 256]} />
       <MeshWobbleMaterial
         color={color.violet[900]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={1}
         metalness={4}
-        factor={10000000}
+        factor={100}
         speed={0}
         roughness={0}
       />
@@ -58,13 +58,13 @@ export default function App(props) {
       colorManagement={true}
       next={props.next}
       camera={{
-        position: [-199.56328165525338, 101.69753128550823, -453.4008452634355],
+        position: [439.63081543585247, 107.49836791591348, 662.5731544084647],
       }}
     >
       <color attach="background" args={[color.rose[200]]} />
       <EffectComposer disableNormalPass={true}>
         <HueSaturation saturation={0.7} />
-        <Scanline blendFunction={BlendFunction.OVERLAY} density={10} />
+        <Scanline blendFunction={BlendFunction.OVERLAY} density={4} />
         <ChromaticAberration
           blendFunction={BlendFunction.OVERLAY}
           offset={[0.02, 0.75]}

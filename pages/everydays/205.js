@@ -29,7 +29,7 @@ function Inner() {
         blur={5}
         far={1.6}
       />
-      <Environment preset="forest" />
+      <Environment preset="apartment" />
     </>
   );
 }
@@ -37,16 +37,16 @@ function Inner() {
 function Ball() {
   return (
     <mesh position={[0.5, 1, 0]}>
-      <dodecahedronBufferGeometry args={[10, 10, 10]} />
+      <coneBufferGeometry args={[256, 256, 256]} />
       <MeshWobbleMaterial
-        color={color.pink[900]}
+        color={color.violet[900]}
         envMapIntensity={1}
         clearcoat={1}
         clearcoatRoughness={1}
         metalness={4}
         factor={100}
         speed={0}
-        roughness={1}
+        roughness={0}
       />
     </mesh>
   );
@@ -58,10 +58,7 @@ export default function App(props) {
       colorManagement={true}
       next={props.next}
       camera={{
-        position: [
-          -0.0000021800329758337406, 14.683455799200814,
-          0.000014520720726999237,
-        ],
+        position: [-153.02342720011626, 58.056290782323615, -98.13060544869813],
       }}
     >
       <color attach="background" args={[color.rose[200]]} />
