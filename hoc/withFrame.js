@@ -13,7 +13,7 @@ export const withFrame =
       currentFrame = useCurrentFrame();
     } else {
       useFrame(({ clock }) => {
-        setFrame(clock.getElapsedTime() * 30);
+        setFrame(clock.getElapsedTime() * 30 / 100);
       });
     }
 
