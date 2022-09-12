@@ -118,9 +118,7 @@ export default function App({ Component, pageProps }) {
 
   function navigate(direction = "prev") {
     const amount = day.current;
-    const lastCharRoute = Number(
-      router.pathname.substr(router.pathname.length - 1)
-    );
+    const lastCharRoute = Number(router.pathname.split("/").pop());
 
     if (direction === "prev") {
       if (lastCharRoute === 1) {
@@ -191,11 +189,22 @@ export default function App({ Component, pageProps }) {
                   </h1>
                 </a>
               </Link>
-              <h2
-                className={`w-full p-10 text-white text-4xl inline-block !leading-[0.9] font-black uppercase cursor-pointer`}
-              >
-                Day {current}
-              </h2>
+              <p className={`p-10 uppercase text-white text-sm leading-loose`}>
+                <span
+                  className={`max-w-xs inline-block space-y-4 text-3xl font-black`}
+                >
+                  300 day art project using code. Made by{" "}
+                  <a
+                    href="https://dennn.is"
+                    target="_blank"
+                    className={`underline hover:no-underline`}
+                    rel="noreferrer"
+                  >
+                    Dennis Josek
+                  </a>
+                  .
+                </span>
+              </p>
               {router.pathname.includes("everydays") && (
                 <div className={`grid grid-cols-2 divide-x divide-white`}>
                   {[
@@ -224,18 +233,6 @@ export default function App({ Component, pageProps }) {
                   })}
                 </div>
               )}
-              <p
-                className={`p-10 text-white text-sm leading-loose ${
-                  router.pathname.includes("everydays") ? "hidden md:block" : ""
-                }`}
-              >
-                <span className={`max-w-xs inline-block space-y-4`}>
-                  Interdimensional creator based in Berlin, Germany. Making
-                  weird things with code (three.js) since October 10th, 2021.
-                  <br />
-                  <span className="inline-block">One new piece every day.</span>
-                </span>
-              </p>
               <div
                 className={`flex flex-col divide-y divide-white ${
                   router.pathname.includes("everydays") ? "hidden md:block" : ""
